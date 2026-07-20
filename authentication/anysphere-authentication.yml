@@ -1,0 +1,23 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/anysphere-cloud-agents-openapi-original.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: |-
+    API key from Cursor Dashboard, supplied as the Basic
+    Authentication username with an empty password.
+  sources:
+  - openapi/anysphere-cloud-agents-openapi-original.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: |-
+    API key from Cursor Dashboard, supplied via
+    `Authorization: Bearer <key>`. Equivalent to Basic Auth.
+  sources:
+  - openapi/anysphere-cloud-agents-openapi-original.yml
