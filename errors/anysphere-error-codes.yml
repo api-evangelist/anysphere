@@ -1,0 +1,100 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/anysphere-cloud-agents-openapi-original.yml (components.schemas.Error)
+format: custom-json
+envelope:
+  shape: '{ "error": { "code": string, "message": string, "helpUrl"?: uri, "provider"?: string } }'
+  code_field: error.code
+  message_field: error.message
+  content_type: application/json
+  notes: >-
+    Cursor Cloud Agents API does not use RFC 9457 problem+json. Errors are returned as a
+    JSON object with a machine-readable `error.code`, a human `error.message`, and optional
+    `helpUrl`/`provider` (populated for codes like integration_not_connected).
+http_statuses:
+- status: 400
+  response: BadRequest
+  description: Validation error or malformed request body.
+- status: 401
+  response: Unauthorized
+  description: Invalid or missing API key.
+- status: 403
+  response: Forbidden
+  description: Authenticated but insufficient permissions, plan required, or feature unavailable.
+- status: 404
+  response: NotFound
+  description: Agent or run not found.
+- status: 409
+  response: Conflict
+  description: Resource state conflict (agent_busy, agent_archived, agent_id_conflict, run_not_cancellable).
+- status: 410
+  response: Gone
+  description: Stream retention window has elapsed (stream_expired).
+- status: 429
+  response: RateLimited
+  description: Rate limit exceeded. Includes Retry-After, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset headers.
+- status: 500
+  response: InternalError
+  description: Internal server error.
+error_codes:
+- code: unauthorized
+  http: 401
+- code: api_key_not_found
+  http: 401
+- code: plan_required
+  http: 403
+- code: role_forbidden
+  http: 403
+- code: feature_unavailable
+  http: 403
+- code: integration_not_connected
+  http: 403
+  notes: Populates helpUrl and provider.
+- code: validation_error
+  http: 400
+- code: missing_body
+  http: 400
+- code: invalid_model
+  http: 400
+- code: invalid_branch_name
+  http: 400
+- code: repository_required
+  http: 400
+- code: repository_access
+  http: 403
+- code: pr_resolution_failed
+  http: 400
+- code: artifact_not_found
+  http: 404
+- code: service_account_required
+  http: 403
+- code: agent_not_found
+  http: 404
+- code: run_not_found
+  http: 404
+- code: agent_busy
+  http: 409
+- code: agent_archived
+  http: 409
+- code: agent_id_conflict
+  http: 409
+- code: run_not_cancellable
+  http: 409
+- code: rate_limit_exceeded
+  http: 429
+- code: usage_limit_exceeded
+  http: 429
+- code: stream_expired
+  http: 410
+- code: stream_unavailable
+  http: 503
+- code: invalid_last_event_id
+  http: 400
+- code: client_cancelled
+  http: 499
+- code: not_implemented
+  http: 501
+- code: upstream_error
+  http: 502
+- code: internal_error
+  http: 500

@@ -1,0 +1,40 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/anysphere-cloud-agents-openapi-original.yml + https://cursor.com/security
+standards:
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme; auth is HTTP Basic/Bearer with a dashboard API key.
+- id: oidc
+  conforms: false
+- id: http-bearer
+  conforms: true
+  evidence: components.securitySchemes.bearerAuth type http scheme bearer.
+- id: http-basic
+  conforms: true
+  evidence: components.securitySchemes.basicAuth type http scheme basic.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom application/json envelope, not application/problem+json.
+- id: cursor-pagination
+  conforms: true
+  evidence: limit/cursor request params and nextCursor response field on list operations.
+- id: rate-limit-headers
+  conforms: true
+  evidence: 429 responses carry Retry-After and X-RateLimit-Limit/Remaining/Reset.
+- id: sse-streaming
+  conforms: true
+  evidence: streamRun emits Server-Sent Events with resumable Last-Event-ID.
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi 3.0.3 document published at cursor.com/docs-static.
+- id: soc2-type-ii
+  conforms: true
+  evidence: SOC 2 Type II attestation available via trust.cursor.com (per cursor.com/security).
+compliance:
+  programs: [SOC 2 Type II]
+  trust_center: https://trust.cursor.com
+  source: https://cursor.com/security
+  notes: >-
+    SOC 2 Type II attestation available on request via the trust center; annual third-party
+    penetration testing. No public claim of ISO 27001, PCI DSS, HIPAA, or FedRAMP located.

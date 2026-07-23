@@ -1,0 +1,170 @@
+openapi: 3.0.3
+info:
+  title: Cursor Cloud Agents Repositories API
+  description: 'Programmatically create and manage Cursor Cloud Agents that work
+
+    autonomously on your repositories. v1 separates a durable agent
+
+    from one or more runs: each prompt submission creates a run on the
+
+    agent. Streaming and cancellation are scoped to the active run.
+
+    '
+  version: 1.0.0
+  contact:
+    email: background-agent-feedback@cursor.com
+servers:
+- url: https://api.cursor.com
+  description: Production server
+security:
+- basicAuth: []
+- bearerAuth: []
+tags:
+- name: Repositories
+paths:
+  /v1/repositories:
+    get:
+      summary: List GitHub repositories
+      description: 'List GitHub repositories accessible to the authenticated user
+
+        through Cursor''s GitHub App installation. This endpoint has
+
+        very strict rate limits (1 request per user per minute, 30
+
+        per user per hour) and can take tens of seconds to respond
+
+        for users with access to many repositories. Cache responses
+
+        aggressively and handle this information not being available
+
+        gracefully.
+
+        '
+      operationId: listRepositories
+      responses:
+        '200':
+          description: Repositories retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRepositoriesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      tags:
+      - Repositories
+components:
+  schemas:
+    Repository:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: GitHub repository URL.
+          example: https://github.com/your-org/your-repo
+    ListRepositoriesResponse:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Repository'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+              description: 'Machine-readable error code. Possible values include
+
+                `unauthorized`, `api_key_not_found`, `plan_required`,
+
+                `role_forbidden`, `feature_unavailable`,
+
+                `integration_not_connected`, `validation_error`,
+
+                `missing_body`, `invalid_model`, `invalid_branch_name`,
+
+                `repository_required`, `repository_access`,
+
+                `pr_resolution_failed`, `artifact_not_found`,
+
+                `service_account_required`, `agent_not_found`,
+
+                `run_not_found`, `agent_busy`, `agent_archived`,
+
+                `agent_id_conflict`, `run_not_cancellable`,
+
+                `rate_limit_exceeded`, `usage_limit_exceeded`,
+
+                `stream_expired`, `stream_unavailable`,
+
+                `invalid_last_event_id`, `client_cancelled`,
+
+                `not_implemented`, `upstream_error`, and
+
+                `internal_error`.
+
+                '
+            message:
+              type: string
+              description: Human-readable error message.
+            helpUrl:
+              type: string
+              format: uri
+              description: Optional follow-up link. Populated for codes like `integration_not_connected`.
+            provider:
+              type: string
+              minLength: 1
+              description: Optional provider identifier. Populated for codes like `integration_not_connected`.
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'API key from Cursor Dashboard, supplied as the Basic
+
+        Authentication username with an empty password.
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key from Cursor Dashboard, supplied via
+
+        `Authorization: Bearer <key>`. Equivalent to Basic Auth.
+
+        '

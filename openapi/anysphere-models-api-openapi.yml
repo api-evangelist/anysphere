@@ -1,0 +1,261 @@
+openapi: 3.0.3
+info:
+  title: Cursor Cloud Agents Models API
+  description: 'Programmatically create and manage Cursor Cloud Agents that work
+
+    autonomously on your repositories. v1 separates a durable agent
+
+    from one or more runs: each prompt submission creates a run on the
+
+    agent. Streaming and cancellation are scoped to the active run.
+
+    '
+  version: 1.0.0
+  contact:
+    email: background-agent-feedback@cursor.com
+servers:
+- url: https://api.cursor.com
+  description: Production server
+security:
+- basicAuth: []
+- bearerAuth: []
+tags:
+- name: Models
+paths:
+  /v1/models:
+    get:
+      summary: List models
+      description: 'Returns a recommended set of explicit model IDs you can pass
+
+        to the `model.id` field on POST /v1/agents. To use the
+
+        configured default model, omit the `model` field from the
+
+        request body entirely.
+
+        '
+      operationId: listModels
+      responses:
+        '200':
+          description: Models retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      tags:
+      - Models
+components:
+  schemas:
+    ModelParameterDefinition:
+      type: object
+      required:
+      - id
+      - values
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Parameter identifier. Pass as `model.params[].id`.
+          example: fast
+        displayName:
+          type: string
+          minLength: 1
+          description: Human-readable label for the parameter.
+          example: Fast
+        values:
+          type: array
+          minItems: 1
+          description: Permitted values for this parameter.
+          items:
+            $ref: '#/components/schemas/ModelParameterValueDefinition'
+    ModelVariant:
+      type: object
+      required:
+      - params
+      - displayName
+      properties:
+        params:
+          type: array
+          description: Concrete parameter values that, combined with the parent model `id`, form a valid model selection. May be empty.
+          items:
+            type: object
+            required:
+            - id
+            - value
+            properties:
+              id:
+                type: string
+                minLength: 1
+              value:
+                type: string
+                minLength: 1
+        displayName:
+          type: string
+          minLength: 1
+          description: Human-readable label for this variant.
+        description:
+          type: string
+          minLength: 1
+        isDefault:
+          type: boolean
+          description: True for the variant Cursor selects when the user picks this model without explicit `params`.
+    ModelParameterValueDefinition:
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+          minLength: 1
+          description: Permitted value for the parameter.
+          example: 'true'
+        displayName:
+          type: string
+          minLength: 1
+          description: Human-readable label for the value.
+          example: Fast
+    ListModelsResponse:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          description: Recommended models. Use `id` (and optionally `params`) when creating an agent.
+          items:
+            $ref: '#/components/schemas/ModelListItem'
+    ModelListItem:
+      type: object
+      required:
+      - id
+      - displayName
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Pass this value as `model.id` when creating an agent.
+          example: composer-2
+        displayName:
+          type: string
+          minLength: 1
+          description: Human-readable model name.
+          example: Composer 2
+        description:
+          type: string
+          minLength: 1
+        aliases:
+          type: array
+          description: Alternate IDs that resolve to the same model.
+          items:
+            type: string
+            minLength: 1
+          example:
+          - composer-latest
+          - composer
+        parameters:
+          type: array
+          description: Per-model parameter definitions, when the model accepts parameters. Use these to populate `model.params`.
+          items:
+            $ref: '#/components/schemas/ModelParameterDefinition'
+        variants:
+          type: array
+          description: Concrete `id`+`params` combinations the model accepts.
+          items:
+            $ref: '#/components/schemas/ModelVariant'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+              description: 'Machine-readable error code. Possible values include
+
+                `unauthorized`, `api_key_not_found`, `plan_required`,
+
+                `role_forbidden`, `feature_unavailable`,
+
+                `integration_not_connected`, `validation_error`,
+
+                `missing_body`, `invalid_model`, `invalid_branch_name`,
+
+                `repository_required`, `repository_access`,
+
+                `pr_resolution_failed`, `artifact_not_found`,
+
+                `service_account_required`, `agent_not_found`,
+
+                `run_not_found`, `agent_busy`, `agent_archived`,
+
+                `agent_id_conflict`, `run_not_cancellable`,
+
+                `rate_limit_exceeded`, `usage_limit_exceeded`,
+
+                `stream_expired`, `stream_unavailable`,
+
+                `invalid_last_event_id`, `client_cancelled`,
+
+                `not_implemented`, `upstream_error`, and
+
+                `internal_error`.
+
+                '
+            message:
+              type: string
+              description: Human-readable error message.
+            helpUrl:
+              type: string
+              format: uri
+              description: Optional follow-up link. Populated for codes like `integration_not_connected`.
+            provider:
+              type: string
+              minLength: 1
+              description: Optional provider identifier. Populated for codes like `integration_not_connected`.
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'API key from Cursor Dashboard, supplied as the Basic
+
+        Authentication username with an empty password.
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key from Cursor Dashboard, supplied via
+
+        `Authorization: Bearer <key>`. Equivalent to Basic Auth.
+
+        '

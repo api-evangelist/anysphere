@@ -1,0 +1,20 @@
+generated: '2026-07-17'
+method: searched
+source: https://cursor.com/docs + https://cursor.com/changelog + https://status.cursor.com
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://cursor.com/docs
+  notes: Path-based versioning (/v1/...); a small /v0/ private-workers surface is earlier-stage.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No formal deprecation/Sunset (RFC 8594) policy located for the Cloud Agents API. No
+    operations are marked deprecated in the OpenAPI. Not emitting a Deprecation pointer.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.cursor.com
+changelog: https://cursor.com/changelog
+deprecated_operations: []

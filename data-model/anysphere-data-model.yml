@@ -1,0 +1,53 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/anysphere-cloud-agents-openapi-original.yml (components.schemas)
+entities:
+- name: Agent
+  id_prefix: 'bc-'
+  description: A durable Cloud Agent that works autonomously on a repository.
+  relationships:
+  - has_many: Run
+    via: agentId
+  - has_many: Artifact
+    via: agentId
+  - has_one: RepoConfig
+    via: source
+  - references: ModelRef
+    via: model
+  - has_many: McpServer
+    via: mcpServers
+- name: Run
+  id_prefix: 'run-'
+  description: One prompt submission/execution against an agent.
+  relationships:
+  - belongs_to: Agent
+    via: agentId
+  - has_one: RunGit
+    via: git
+  - has_one: RunUsage
+    via: usage
+  - emits: RunStreamToolCallEvent
+    via: stream
+- name: Artifact
+  description: A file/output produced by an agent run, downloadable via presigned S3 URL.
+  relationships:
+  - belongs_to: Agent
+    via: agentId
+- name: Repository
+  description: A GitHub repository accessible to the API key.
+  relationships:
+  - referenced_by: RepoConfig
+    via: repository
+- name: ModelListItem
+  description: An available model the agent can run on.
+  relationships:
+  - referenced_by: Agent
+    via: model
+- name: McpServer
+  description: An MCP server (stdio or remote) an agent is configured to use.
+  variants: [StdioMcpServer, RemoteMcpServer]
+- name: ApiKeyInfo
+  description: Metadata about the calling API key (user, team, scopes).
+notes: >-
+  Derived from schema $refs and id-reference fields. Agent (bc-*) is the aggregate root:
+  runs, artifacts, git/usage, and MCP/model/repo configuration all hang off the agent.

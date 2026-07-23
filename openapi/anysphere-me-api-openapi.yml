@@ -1,0 +1,171 @@
+openapi: 3.0.3
+info:
+  title: Cursor Cloud Agents Me API
+  description: 'Programmatically create and manage Cursor Cloud Agents that work
+
+    autonomously on your repositories. v1 separates a durable agent
+
+    from one or more runs: each prompt submission creates a run on the
+
+    agent. Streaming and cancellation are scoped to the active run.
+
+    '
+  version: 1.0.0
+  contact:
+    email: background-agent-feedback@cursor.com
+servers:
+- url: https://api.cursor.com
+  description: Production server
+security:
+- basicAuth: []
+- bearerAuth: []
+tags:
+- name: Me
+paths:
+  /v1/me:
+    get:
+      summary: API key info
+      description: Retrieve information about the API key being used for authentication.
+      operationId: getApiKeyInfo
+      responses:
+        '200':
+          description: API key info retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      tags:
+      - Me
+components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ApiKeyInfo:
+      type: object
+      required:
+      - apiKeyName
+      - createdAt
+      properties:
+        apiKeyName:
+          type: string
+          description: Display name of the API key.
+          example: Production API Key
+        createdAt:
+          type: string
+          format: date-time
+          description: When the API key was created.
+        userId:
+          type: integer
+          minimum: 0
+          description: Numeric Cursor user ID of the API key's owner. Omitted for service-account / team API keys, which aren't tied to a specific user.
+          example: 42
+        userEmail:
+          type: string
+          format: email
+          description: Email of the API key's owner. Omitted for service-account / team API keys.
+          example: developer@example.com
+        userFirstName:
+          type: string
+          minLength: 1
+          description: First name of the API key's owner, when populated.
+          example: Alex
+        userLastName:
+          type: string
+          minLength: 1
+          description: Last name of the API key's owner, when populated.
+          example: Rivera
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+              description: 'Machine-readable error code. Possible values include
+
+                `unauthorized`, `api_key_not_found`, `plan_required`,
+
+                `role_forbidden`, `feature_unavailable`,
+
+                `integration_not_connected`, `validation_error`,
+
+                `missing_body`, `invalid_model`, `invalid_branch_name`,
+
+                `repository_required`, `repository_access`,
+
+                `pr_resolution_failed`, `artifact_not_found`,
+
+                `service_account_required`, `agent_not_found`,
+
+                `run_not_found`, `agent_busy`, `agent_archived`,
+
+                `agent_id_conflict`, `run_not_cancellable`,
+
+                `rate_limit_exceeded`, `usage_limit_exceeded`,
+
+                `stream_expired`, `stream_unavailable`,
+
+                `invalid_last_event_id`, `client_cancelled`,
+
+                `not_implemented`, `upstream_error`, and
+
+                `internal_error`.
+
+                '
+            message:
+              type: string
+              description: Human-readable error message.
+            helpUrl:
+              type: string
+              format: uri
+              description: Optional follow-up link. Populated for codes like `integration_not_connected`.
+            provider:
+              type: string
+              minLength: 1
+              description: Optional provider identifier. Populated for codes like `integration_not_connected`.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'API key from Cursor Dashboard, supplied as the Basic
+
+        Authentication username with an empty password.
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key from Cursor Dashboard, supplied via
+
+        `Authorization: Bearer <key>`. Equivalent to Basic Auth.
+
+        '

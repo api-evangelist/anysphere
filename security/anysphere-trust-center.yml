@@ -1,0 +1,24 @@
+generated: '2026-07-17'
+method: searched
+probe: true
+url: https://trust.cursor.com
+certifications:
+- SOC 2 Type II
+programs:
+- Annual third-party penetration testing
+- Privacy Mode (no training on your data when enabled)
+- Least-privilege infrastructure access with MFA
+- CMEK (customer-managed encryption keys) for enterprise
+- Subprocessor transparency (no China-headquartered infrastructure/subprocessors)
+contact:
+- security@cursor.com
+- security-reports@cursor.com
+evidence:
+- source: https://cursor.com/security
+  keywords: [soc 2 type ii, trust center, penetration testing, privacy mode, subprocessors]
+- source: https://trust.cursor.com
+  keywords: [trust center]
+notes: >-
+  SOC 2 Type II attestation and subprocessor listings available on request via
+  trust.cursor.com. The automated probe did not extract keywords from the JS-rendered
+  trust portal; this artifact is confirmed from the cursor.com/security page (searched).

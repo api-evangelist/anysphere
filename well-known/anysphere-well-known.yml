@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: searched
+source: live probes of /.well-known/ on Cursor hosts
+hosts:
+- host: https://cursor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: anysphere-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.cursor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+notes: >-
+  Only https://cursor.com/.well-known/security.txt returned a real document (RFC 9116).
+  The other 200s on cursor.com were the SPA catch-all HTML and are recorded as 404 (no real
+  discovery document). api.cursor.com serves a JSON 404 for all /.well-known/ paths.

@@ -1,0 +1,12 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/anysphere-cloud-agents-openapi-original.yml + conventions/ + errors/
+skills:
+- file: anysphere-create-cloud-agent.md
+  name: Create and monitor a Cursor Cloud Agent
+  api: openapi/anysphere-cloud-agents-openapi-original.yml
+  operations: [createAgent, getRun, streamRun, listArtifacts, downloadArtifact]
+- file: anysphere-follow-up-run.md
+  name: Send a follow-up prompt and reconcile agent usage
+  api: openapi/anysphere-cloud-agents-openapi-original.yml
+  operations: [listAgents, createRun, listRuns, getRun, getAgentUsage, cancelRun, archiveAgent]

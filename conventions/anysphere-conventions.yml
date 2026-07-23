@@ -1,0 +1,49 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/anysphere-cloud-agents-openapi-original.yml + https://cursor.com/docs
+api: Cursor Cloud Agents API
+authentication:
+  style: http
+  schemes: [basic, bearer]
+  detail: >-
+    API key from the Cursor Dashboard. Supplied either as the Basic Auth username with an
+    empty password, or as `Authorization: Bearer <key>`. Service-account keys and user-scoped
+    sub-tokens (POST /v1/sub-tokens) are also supported.
+  ref: authentication/anysphere-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    The API does not document an Idempotency-Key header or parameter. Writes are not
+    declared idempotent; agent identity conflicts surface as 409 agent_id_conflict.
+pagination:
+  style: cursor
+  request_params:
+    limit: { in: query, default: 20, max: 100 }
+    cursor: { in: query, description: Pagination cursor from the previous response. }
+  response_fields:
+    nextCursor: Opaque cursor to request the next page; absent/null on the last page.
+  applies_to: [listAgents, listRuns]
+versioning:
+  scheme: uri-path
+  current: v1
+  notes: >-
+    Path-based versioning (/v1/...). A small set of fleet/worker endpoints are under /v0/
+    (private-workers) and marked as earlier-stage.
+rate_limiting:
+  signaling: headers
+  headers: [Retry-After, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  status: 429
+  ref: rate-limits/anysphere-rate-limits.yml
+error_envelope:
+  shape: '{ "error": { "code", "message", "helpUrl"?, "provider"? } }'
+  content_type: application/json
+  format: custom-json
+  ref: errors/anysphere-error-codes.yml
+streaming:
+  style: server-sent-events
+  operation: streamRun
+  path: /v1/agents/{id}/runs/{runId}/stream
+  notes: >-
+    Run events are streamed over SSE with resumable Last-Event-ID support; expired streams
+    return 410 stream_expired. This is a pull/streaming surface, not a webhook push surface.
+lifecycle_ref: lifecycle/anysphere-lifecycle.yml

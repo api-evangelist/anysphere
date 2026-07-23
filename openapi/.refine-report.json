@@ -1,0 +1,22 @@
+{
+  "provider": "anysphere",
+  "sources": [
+    "anysphere-agents-api-openapi.yml",
+    "anysphere-me-api-openapi.yml",
+    "anysphere-models-api-openapi.yml",
+    "anysphere-repositories-api-openapi.yml",
+    "anysphere-sub-tokens-api-openapi.yml"
+  ],
+  "outputs": [
+    "anysphere-agents-api-openapi.yml",
+    "anysphere-me-api-openapi.yml",
+    "anysphere-models-api-openapi.yml",
+    "anysphere-repositories-api-openapi.yml",
+    "anysphere-sub-tokens-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,34 @@
+generated: '2026-07-17'
+method: searched
+source: https://cursor.com/changelog
+scheme: semver-minor
+current_version: '3.11'
+notes: >-
+  Cursor publishes a dated product changelog (major.minor). This tracks the Cursor
+  application/agent product; the Cloud Agents REST API is versioned separately via URI
+  path (v1). Recent window only.
+entries:
+- date: '2026-07-17'
+  title: Improvements to Cursor in Slack
+  breaking: false
+  highlights: Slack integration shows plans upfront and supports multi-repo environments.
+- version: '3.11'
+  date: '2026-07-10'
+  breaking: false
+  title: Side Chats and Conversation Search
+  highlights: Parallel side conversations alongside the main chat; searchable conversation history.
+- version: '3.10'
+  date: '2026-06-30'
+  breaking: false
+  title: MCPs and Organizations in Team Marketplaces
+  highlights: Admins can distribute MCP servers across a team marketplace.
+- version: '3.9'
+  date: '2026-06-29'
+  breaking: false
+  title: Cursor Mobile App for iOS
+  highlights: iOS app for remote agent management with cloud execution.
+- version: '3.9'
+  date: '2026-06-22'
+  breaking: false
+  title: Customize Cursor
+  highlights: Centralized customization for plugins, skills, and marketplace.

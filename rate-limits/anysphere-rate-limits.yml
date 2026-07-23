@@ -1,0 +1,47 @@
+generated: '2026-07-17'
+method: searched
+source: https://cursor.com/docs/account/teams/admin-api + Cloud Agents OpenAPI RateLimited response
+scheme: header-signaled
+headers:
+- Retry-After
+- X-RateLimit-Limit
+- X-RateLimit-Remaining
+- X-RateLimit-Reset
+limits:
+- api: Cursor Cloud Agents API
+  scope: per-key
+  limit_count: null
+  detail: >-
+    Limits are enforced but not published as fixed numbers; 429 responses carry
+    Retry-After and X-RateLimit-* headers. usage_limit_exceeded is separate from
+    rate_limit_exceeded (plan/usage ceiling vs request-rate ceiling).
+- api: Cursor Admin API
+  endpoint: POST /teams/filtered-usage-events
+  scope: per-team
+  limit_count: 60
+  window: 1m
+- api: Cursor Admin API
+  endpoint: POST /teams/user-spend-limit
+  scope: per-team
+  limit_count: 250
+  window: 1m
+- api: Cursor Admin API
+  endpoint: POST /teams/remove-member
+  scope: per-team
+  limit_count: 50
+  window: 1m
+- api: Cursor Admin API
+  endpoint: GET /teams/audit-logs
+  scope: per-team
+  limit_count: 20
+  window: 1m
+- api: Cursor Admin API
+  endpoint: POST /teams/daily-usage-data
+  scope: per-team
+  limit_count: 20
+  window: 1m
+- api: Cursor Admin API
+  endpoint: teams/groups (create/patch/delete/members)
+  scope: per-team
+  limit_count: 20
+  window: 1m

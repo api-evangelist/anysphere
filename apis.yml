@@ -1,27 +1,195 @@
 aid: anysphere
 name: Anysphere
-description: 'Anysphere is a company surfaced as a portfolio company of thrive-capital and added to the
-  API Evangelist network as a stub for enrichment. Sector: developer-tools. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Anysphere is the applied-research company behind Cursor, the AI-native code editor and
+  agent platform. Beyond the desktop app, Cursor ships a public Cloud Agents REST API
+  (https://api.cursor.com) that lets developers programmatically create autonomous coding
+  agents, submit prompt runs, stream run events over SSE, and retrieve produced artifacts,
+  plus an Admin API for team member/usage/spend management and a first-party terminal CLI
+  (the `agent` binary). Authentication is a dashboard-issued API key over HTTP Basic/Bearer.
+  This profile was surfaced as a Thrive Capital portfolio company and enriched from Cursor's
+  public developer surface.
 url: https://raw.githubusercontent.com/api-evangelist/anysphere/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - thrive-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: public-api-found
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
 modified: '2026-07-17'
+image: https://cursor.com/apple-touch-icon.png
 tags:
 - Company
 - Developer Tools
-apis: []
+- Artificial Intelligence
+- Code Editor
+- Coding Agents
+- Cloud Agents
+- Developer Productivity
+- IDE
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: anysphere:anysphere-agents-api
+  name: Anysphere Agents API
+  description: The Agents API from Anysphere — 11 operation(s) for agents.
+  humanURL: https://cursor.com/docs
+  baseURL: https://api.cursor.com
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/anysphere-agents-api-openapi.yml
+  - type: APIReference
+    url: https://cursor.com/docs
+  - type: Documentation
+    url: https://cursor.com/docs
+- aid: anysphere:anysphere-me-api
+  name: Anysphere Me API
+  description: The Me API from Anysphere — 1 operation(s) for me.
+  humanURL: https://cursor.com/docs
+  baseURL: https://api.cursor.com
+  tags:
+  - Me
+  properties:
+  - type: OpenAPI
+    url: openapi/anysphere-me-api-openapi.yml
+  - type: APIReference
+    url: https://cursor.com/docs
+  - type: Documentation
+    url: https://cursor.com/docs
+- aid: anysphere:anysphere-models-api
+  name: Anysphere Models API
+  description: The Models API from Anysphere — 1 operation(s) for models.
+  humanURL: https://cursor.com/docs
+  baseURL: https://api.cursor.com
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/anysphere-models-api-openapi.yml
+  - type: APIReference
+    url: https://cursor.com/docs
+  - type: Documentation
+    url: https://cursor.com/docs
+- aid: anysphere:anysphere-repositories-api
+  name: Anysphere Repositories API
+  description: The Repositories API from Anysphere — 1 operation(s) for repositories.
+  humanURL: https://cursor.com/docs
+  baseURL: https://api.cursor.com
+  tags:
+  - Repositories
+  properties:
+  - type: OpenAPI
+    url: openapi/anysphere-repositories-api-openapi.yml
+  - type: APIReference
+    url: https://cursor.com/docs
+  - type: Documentation
+    url: https://cursor.com/docs
+- aid: anysphere:anysphere-sub-tokens-api
+  name: Anysphere Sub Tokens API
+  description: The Sub Tokens API from Anysphere — 1 operation(s) for sub tokens.
+  humanURL: https://cursor.com/docs
+  baseURL: https://api.cursor.com
+  tags:
+  - Sub Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/anysphere-sub-tokens-api-openapi.yml
+  - type: APIReference
+    url: https://cursor.com/docs
+  - type: Documentation
+    url: https://cursor.com/docs
 common:
+- type: VulnerabilityDisclosure
+  url: security/anysphere-vulnerability-disclosure.yml
+- type: Security
+  url: https://cursor.com/security
+- type: DomainSecurity
+  url: security/anysphere-domain-security.yml
+- type: TrustCenter
+  url: security/anysphere-trust-center.yml
+- type: Compliance
+  url: https://cursor.com/security
+- type: AgenticAccess
+  url: agentic-access/anysphere-agentic-access.yml
+- type: Authentication
+  url: authentication/anysphere-authentication.yml
+- type: Conventions
+  url: conventions/anysphere-conventions.yml
+- type: ErrorCatalog
+  url: errors/anysphere-error-codes.yml
+- type: Conformance
+  url: conformance/anysphere-conformance.yml
+- type: DataModel
+  url: data-model/anysphere-data-model.yml
+- type: RateLimits
+  url: rate-limits/anysphere-rate-limits.yml
+- type: Lifecycle
+  url: lifecycle/anysphere-lifecycle.yml
+- type: StatusPage
+  url: https://status.cursor.com
+- type: ChangeLog
+  url: changelog/anysphere-changelog.yml
+- type: WellKnown
+  url: well-known/anysphere-well-known.yml
+- type: SecurityTxt
+  url: well-known/anysphere-security.txt
+- type: Packages
+  url: packages/anysphere-packages.yml
+- type: CLI
+  url: cli/anysphere-cli.yml
+- type: MCPServer
+  url: mcp/anysphere-mcp.yml
+- type: LLMsTxt
+  url: llms/anysphere-llms.txt
+- type: Overlay
+  url: overlays/anysphere-cloud-agents-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://cursor.com/docs
+- type: Documentation
+  url: https://cursor.com/docs
+- type: APIReference
+  url: https://cursor.com/docs
+- type: GettingStarted
+  url: https://cursor.com/docs/get-started/quickstart
+- type: Support
+  url: https://forum.cursor.com
+- type: Blog
+  url: https://cursor.com/blog
+- type: GitHubOrganization
+  url: https://github.com/cursor
+- type: Pricing
+  url: https://cursor.com/pricing
+- type: SignUp
+  url: https://cursor.com/dashboard/api
+- type: TermsOfService
+  url: https://cursor.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://cursor.com/privacy
 - type: Website
   url: https://anysphere.inc
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

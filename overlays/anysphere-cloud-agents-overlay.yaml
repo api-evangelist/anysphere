@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Cursor Cloud Agents API
+  version: 1.0.0
+extends: openapi/anysphere-cloud-agents-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-17'
+    x-apievangelist-provider: anysphere
+    x-apievangelist-product: Cursor Cloud Agents
+    x-authentication: authentication/anysphere-authentication.yml
+    x-conventions: conventions/anysphere-conventions.yml
+    x-error-catalog: errors/anysphere-error-codes.yml
+    x-lifecycle: lifecycle/anysphere-lifecycle.yml
+    x-data-model: data-model/anysphere-data-model.yml
+- target: $.info
+  update:
+    x-pagination:
+      style: cursor
+      request: [limit, cursor]
+      response: [nextCursor]
+    x-rate-limit-headers: [Retry-After, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+    x-idempotency-supported: false
+- target: $.paths['/v1/agents']['post']
+  update:
+    x-agent-skill: skills/anysphere-create-cloud-agent.md
+- target: $.paths['/v1/agents/{id}/runs']['post']
+  update:
+    x-agent-skill: skills/anysphere-follow-up-run.md

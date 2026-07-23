@@ -1,0 +1,44 @@
+generated: '2026-07-17'
+method: searched
+source: https://cursor.com/docs/cli/overview
+name: Cursor CLI
+binary: agent
+description: >-
+  Interact with Cursor AI agents directly from the terminal to write, review, and modify
+  code. Supports interactive conversational sessions and non-interactive automation for
+  scripts and CI pipelines, plus handoff to Cloud Agents.
+install:
+- platform: macOS/Linux/WSL
+  command: curl https://cursor.com/install -fsS | bash
+- platform: Windows PowerShell
+  command: irm 'https://cursor.com/install?win32=true' | iex
+commands:
+- command: agent
+  description: Start an interactive agent session.
+- command: agent ls
+  description: List previous conversations.
+- command: agent resume
+  description: Resume the latest conversation.
+- command: agent --continue
+  description: Continue the previous session.
+- command: agent --resume="chat-id"
+  description: Resume a specific conversation by id.
+flags:
+- flag: --mode
+  values: [agent, plan, ask]
+  description: Interaction mode.
+- flag: -p / --prompt
+  description: Provide the task/prompt (enables non-interactive print mode).
+- flag: --model
+  description: Choose the model (e.g. gpt-5).
+- flag: --output-format
+  description: Set the output format for non-interactive use.
+- flag: --sandbox
+  values: [enabled, disabled]
+  description: Control whether shell commands run sandboxed.
+flows:
+- name: headless / CI
+  detail: Print mode via -p/--prompt with --output-format for scripting and pipelines.
+- name: cloud handoff
+  detail: Continue a local task remotely as a Cloud Agent via cursor.com/agents.
+binary_package: packages/anysphere-packages.yml

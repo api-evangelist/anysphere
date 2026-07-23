@@ -1,0 +1,239 @@
+openapi: 3.0.3
+info:
+  title: Cursor Cloud Agents Sub Tokens API
+  description: 'Programmatically create and manage Cursor Cloud Agents that work
+
+    autonomously on your repositories. v1 separates a durable agent
+
+    from one or more runs: each prompt submission creates a run on the
+
+    agent. Streaming and cancellation are scoped to the active run.
+
+    '
+  version: 1.0.0
+  contact:
+    email: background-agent-feedback@cursor.com
+servers:
+- url: https://api.cursor.com
+  description: Production server
+security:
+- basicAuth: []
+- bearerAuth: []
+tags:
+- name: Sub Tokens
+paths:
+  /v1/sub-tokens:
+    post:
+      summary: Create A User-Scoped Worker Token
+      description: 'Create a one-hour user-scoped token for a My Machines worker to run as an
+
+        active team member. Requires an agent-scoped team service account
+
+        API key. User-scoped tokens can''t mint other user-scoped tokens.
+
+        '
+      operationId: createSubToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubTokenRequest'
+            examples:
+              byEmail:
+                summary: Identify the user by email
+                value:
+                  forUserEmail: alice@company.com
+              byUserId:
+                summary: Identify the user by Cursor user ID
+                value:
+                  forUserId: 42
+      responses:
+        '200':
+          description: User-scoped token created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSubTokenResponse'
+              example:
+                accessToken: eyJ...
+                expiresAt: '2026-04-24T19:00:00.000Z'
+                userId: 42
+                teamId: 456
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      tags:
+      - Sub Tokens
+components:
+  responses:
+    Forbidden:
+      description: Authenticated but insufficient permissions, plan required, or feature unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation error or malformed request body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Agent or run not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    CreateSubTokenRequest:
+      type: object
+      description: Provide exactly one active team member identifier.
+      properties:
+        forUserEmail:
+          type: string
+          format: email
+          minLength: 1
+          description: Active team member email. Case-insensitive. Mutually exclusive with `forUserId`.
+          example: alice@company.com
+        forUserId:
+          type: integer
+          minimum: 1
+          description: Active team member's numeric Cursor user ID. Mutually exclusive with `forUserEmail`.
+          example: 42
+      oneOf:
+      - required:
+        - forUserEmail
+        not:
+          required:
+          - forUserId
+      - required:
+        - forUserId
+        not:
+          required:
+          - forUserEmail
+    CreateSubTokenResponse:
+      type: object
+      required:
+      - accessToken
+      - expiresAt
+      - userId
+      - teamId
+      properties:
+        accessToken:
+          type: string
+          minLength: 1
+          description: Short-lived access token scoped to the requested user. Pass this to the worker with --auth-token or write it to the file used by --auth-token-file.
+          example: eyJ...
+        expiresAt:
+          type: string
+          format: date-time
+          description: When the access token expires (1 hour after mint).
+          example: '2026-04-24T19:00:00.000Z'
+        userId:
+          type: integer
+          description: Numeric ID of the resolved team member.
+          example: 42
+        teamId:
+          type: integer
+          description: Numeric ID of the service account's team.
+          example: 456
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+              description: 'Machine-readable error code. Possible values include
+
+                `unauthorized`, `api_key_not_found`, `plan_required`,
+
+                `role_forbidden`, `feature_unavailable`,
+
+                `integration_not_connected`, `validation_error`,
+
+                `missing_body`, `invalid_model`, `invalid_branch_name`,
+
+                `repository_required`, `repository_access`,
+
+                `pr_resolution_failed`, `artifact_not_found`,
+
+                `service_account_required`, `agent_not_found`,
+
+                `run_not_found`, `agent_busy`, `agent_archived`,
+
+                `agent_id_conflict`, `run_not_cancellable`,
+
+                `rate_limit_exceeded`, `usage_limit_exceeded`,
+
+                `stream_expired`, `stream_unavailable`,
+
+                `invalid_last_event_id`, `client_cancelled`,
+
+                `not_implemented`, `upstream_error`, and
+
+                `internal_error`.
+
+                '
+            message:
+              type: string
+              description: Human-readable error message.
+            helpUrl:
+              type: string
+              format: uri
+              description: Optional follow-up link. Populated for codes like `integration_not_connected`.
+            provider:
+              type: string
+              minLength: 1
+              description: Optional provider identifier. Populated for codes like `integration_not_connected`.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'API key from Cursor Dashboard, supplied as the Basic
+
+        Authentication username with an empty password.
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key from Cursor Dashboard, supplied via
+
+        `Authorization: Bearer <key>`. Equivalent to Basic Auth.
+
+        '

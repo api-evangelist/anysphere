@@ -1,0 +1,68 @@
+generated: '2026-07-17'
+method: derived
+status: candidate
+source: openapi/anysphere-cloud-agents-openapi-original.yml
+server:
+  name: cursor-cloud-agents
+  transport: http
+  url: null
+notes: >-
+  Anysphere does not publish an official hosted MCP server for the Cursor Cloud Agents
+  REST API (Cursor is an MCP *client* — it consumes MCP servers, and agents can be
+  configured with McpServer entries). This is a DERIVED candidate tool list mapping each
+  Cloud Agents operation to a prospective MCP tool, for use if/when an MCP wrapper is built.
+tools:
+- name: create_agent
+  description: Create a Cloud Agent and enqueue its initial run.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#createAgent
+- name: list_agents
+  description: List agents, newest first.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#listAgents
+- name: get_agent
+  description: Retrieve agent metadata.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#getAgent
+- name: delete_agent
+  description: Permanently delete an agent.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#deleteAgent
+- name: create_run
+  description: Send a follow-up prompt to an agent (new run).
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#createRun
+- name: list_runs
+  description: List an agent's runs.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#listRuns
+- name: get_run
+  description: Get run status and results.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#getRun
+- name: stream_run
+  description: Stream run events over SSE.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#streamRun
+- name: cancel_run
+  description: Cancel an active run.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#cancelRun
+- name: get_agent_usage
+  description: Retrieve token usage for an agent.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#getAgentUsage
+- name: archive_agent
+  description: Archive an agent.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#archiveAgent
+- name: unarchive_agent
+  description: Unarchive an agent.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#unarchiveAgent
+- name: list_artifacts
+  description: List an agent's artifacts.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#listArtifacts
+- name: download_artifact
+  description: Get a presigned S3 URL to download an artifact.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#downloadArtifact
+- name: get_api_key_info
+  description: Return information about the calling API key.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#getApiKeyInfo
+- name: list_models
+  description: List available models.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#listModels
+- name: list_repositories
+  description: List accessible GitHub repositories.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#listRepositories
+- name: create_sub_token
+  description: Create a user-scoped worker sub-token.
+  source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#createSubToken
