@@ -118,6 +118,8 @@ apis:
   - type: Documentation
     url: https://cursor.com/docs
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/anysphere/overview
 - type: VulnerabilityDisclosure
   url: security/anysphere-vulnerability-disclosure.yml
 - type: Security
