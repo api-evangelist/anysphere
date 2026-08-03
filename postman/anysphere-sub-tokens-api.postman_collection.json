@@ -1,0 +1,498 @@
+{
+  "info": {
+    "_postman_id": "9f3a63b9-573d-4c02-9003-c184280b06dc",
+    "name": "Cursor Cloud Agents Sub Tokens API",
+    "description": "Programmatically create and manage Cursor Cloud Agents that work\nautonomously on your repositories. v1 separates a durable agent\nfrom one or more runs: each prompt submission creates a run on the\nagent. Streaming and cancellation are scoped to the active run.\n\n\nContact Support:\n Email: background-agent-feedback@cursor.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:01:00.000Z",
+    "updatedAt": "2026-07-28T01:01:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9f3a63b9-573d-4c02-9003-c184280b06dc"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "sub-tokens",
+          "item": [
+            {
+              "name": "Create A User-Scoped Worker Token",
+              "id": "31671bc2-2175-4cbb-9511-bc90bbd7e32c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"forUserEmail\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/sub-tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "sub-tokens"
+                  ]
+                },
+                "description": "Create a one-hour user-scoped token for a My Machines worker to run as an\nactive team member. Requires an agent-scoped team service account\nAPI key. User-scoped tokens can't mint other user-scoped tokens.\n"
+              },
+              "response": [
+                {
+                  "id": "6680b3b7-5a21-46ce-8174-fb68e4e06829",
+                  "name": "User-scoped token created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"forUserEmail\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sub-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sub-tokens"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"accessToken\": \"<string>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"userId\": \"<integer>\",\n  \"teamId\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T01:01:00.000Z",
+                  "updatedAt": "2026-07-28T01:01:00.000Z",
+                  "uid": "35240-6680b3b7-5a21-46ce-8174-fb68e4e06829"
+                },
+                {
+                  "id": "0926d643-1a6b-4464-bf28-cb823b784b49",
+                  "name": "Validation error or malformed request body.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"forUserEmail\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sub-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sub-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:01:00.000Z",
+                  "updatedAt": "2026-07-28T01:01:00.000Z",
+                  "uid": "35240-0926d643-1a6b-4464-bf28-cb823b784b49"
+                },
+                {
+                  "id": "c3c14ba4-fd9c-4f4a-aef2-a5363a6196e6",
+                  "name": "Invalid or missing API key.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"forUserEmail\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sub-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sub-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:01:00.000Z",
+                  "updatedAt": "2026-07-28T01:01:00.000Z",
+                  "uid": "35240-c3c14ba4-fd9c-4f4a-aef2-a5363a6196e6"
+                },
+                {
+                  "id": "cee30497-7711-4df6-82a3-345c00dc1c0d",
+                  "name": "Authenticated but insufficient permissions, plan required, or feature unavailable.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"forUserEmail\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sub-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sub-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:01:00.000Z",
+                  "updatedAt": "2026-07-28T01:01:00.000Z",
+                  "uid": "35240-cee30497-7711-4df6-82a3-345c00dc1c0d"
+                },
+                {
+                  "id": "1410da77-85f5-4f65-a68e-0377b0a5deb3",
+                  "name": "Agent or run not found.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"forUserEmail\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sub-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sub-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:01:00.000Z",
+                  "updatedAt": "2026-07-28T01:01:00.000Z",
+                  "uid": "35240-1410da77-85f5-4f65-a68e-0377b0a5deb3"
+                },
+                {
+                  "id": "9a32044f-76a0-41aa-96ce-8906a125b827",
+                  "name": "Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"forUserEmail\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sub-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sub-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:01:00.000Z",
+                  "updatedAt": "2026-07-28T01:01:00.000Z",
+                  "uid": "35240-9a32044f-76a0-41aa-96ce-8906a125b827"
+                },
+                {
+                  "id": "01e3ce7d-88cd-4fae-b66b-26bc619103e8",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"forUserEmail\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sub-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sub-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:01:00.000Z",
+                  "updatedAt": "2026-07-28T01:01:00.000Z",
+                  "uid": "35240-01e3ce7d-88cd-4fae-b66b-26bc619103e8"
+                }
+              ],
+              "createdAt": "2026-07-28T01:01:00.000Z",
+              "updatedAt": "2026-07-28T01:01:00.000Z",
+              "uid": "35240-31671bc2-2175-4cbb-9511-bc90bbd7e32c"
+            }
+          ],
+          "id": "0de8ead6-5e7e-425f-8852-237c9e55d02c",
+          "createdAt": "2026-07-28T01:01:00.000Z",
+          "updatedAt": "2026-07-28T01:01:00.000Z",
+          "uid": "35240-0de8ead6-5e7e-425f-8852-237c9e55d02c"
+        }
+      ],
+      "id": "2d2aa026-4a30-434c-ba6b-d32994d584ba",
+      "createdAt": "2026-07-28T01:01:00.000Z",
+      "updatedAt": "2026-07-28T01:01:00.000Z",
+      "uid": "35240-2d2aa026-4a30-434c-ba6b-d32994d584ba"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.cursor.com"
+    }
+  ]
+}

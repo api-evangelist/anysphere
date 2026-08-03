@@ -1,0 +1,257 @@
+{
+  "info": {
+    "_postman_id": "ba0ce0d6-535d-4e7a-a33e-329542bd8729",
+    "name": "Cursor Cloud Agents Repositories API",
+    "description": "Programmatically create and manage Cursor Cloud Agents that work\nautonomously on your repositories. v1 separates a durable agent\nfrom one or more runs: each prompt submission creates a run on the\nagent. Streaming and cancellation are scoped to the active run.\n\n\nContact Support:\n Email: background-agent-feedback@cursor.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:00:59.000Z",
+    "updatedAt": "2026-07-28T01:00:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ba0ce0d6-535d-4e7a-a33e-329542bd8729"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "repositories",
+          "item": [
+            {
+              "name": "List GitHub repositories",
+              "id": "2a51aae4-19c3-4b38-b30c-c2a57b637ceb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/repositories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "repositories"
+                  ]
+                },
+                "description": "List GitHub repositories accessible to the authenticated user\nthrough Cursor's GitHub App installation. This endpoint has\nvery strict rate limits (1 request per user per minute, 30\nper user per hour) and can take tens of seconds to respond\nfor users with access to many repositories. Cache responses\naggressively and handle this information not being available\ngracefully.\n"
+              },
+              "response": [
+                {
+                  "id": "423c6d44-7b90-4678-a5c7-0be2b66fc20b",
+                  "name": "Repositories retrieved successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/repositories",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "repositories"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:00:59.000Z",
+                  "updatedAt": "2026-07-28T01:00:59.000Z",
+                  "uid": "35240-423c6d44-7b90-4678-a5c7-0be2b66fc20b"
+                },
+                {
+                  "id": "7f240672-9cd3-4b3e-8902-571d9e42ed58",
+                  "name": "Invalid or missing API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/repositories",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "repositories"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:00:59.000Z",
+                  "updatedAt": "2026-07-28T01:00:59.000Z",
+                  "uid": "35240-7f240672-9cd3-4b3e-8902-571d9e42ed58"
+                },
+                {
+                  "id": "8bef1f58-63e4-4deb-b933-2e77d152e362",
+                  "name": "Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/repositories",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "repositories"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:00:59.000Z",
+                  "updatedAt": "2026-07-28T01:00:59.000Z",
+                  "uid": "35240-8bef1f58-63e4-4deb-b933-2e77d152e362"
+                },
+                {
+                  "id": "78cda151-17c6-4427-ad0b-267208839755",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/repositories",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "repositories"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:00:59.000Z",
+                  "updatedAt": "2026-07-28T01:00:59.000Z",
+                  "uid": "35240-78cda151-17c6-4427-ad0b-267208839755"
+                }
+              ],
+              "createdAt": "2026-07-28T01:00:59.000Z",
+              "updatedAt": "2026-07-28T01:00:59.000Z",
+              "uid": "35240-2a51aae4-19c3-4b38-b30c-c2a57b637ceb"
+            }
+          ],
+          "id": "af741cf8-3aaf-4daf-803e-14c9d435097e",
+          "createdAt": "2026-07-28T01:00:59.000Z",
+          "updatedAt": "2026-07-28T01:00:59.000Z",
+          "uid": "35240-af741cf8-3aaf-4daf-803e-14c9d435097e"
+        }
+      ],
+      "id": "803c783e-5904-40c9-9733-16a38300af29",
+      "createdAt": "2026-07-28T01:00:59.000Z",
+      "updatedAt": "2026-07-28T01:00:59.000Z",
+      "uid": "35240-803c783e-5904-40c9-9733-16a38300af29"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.cursor.com"
+    }
+  ]
+}

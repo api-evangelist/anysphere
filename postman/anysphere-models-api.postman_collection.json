@@ -1,0 +1,257 @@
+{
+  "info": {
+    "_postman_id": "ad60b868-8b9f-47b7-beea-c0982d954f68",
+    "name": "Cursor Cloud Agents Models API",
+    "description": "Programmatically create and manage Cursor Cloud Agents that work\nautonomously on your repositories. v1 separates a durable agent\nfrom one or more runs: each prompt submission creates a run on the\nagent. Streaming and cancellation are scoped to the active run.\n\n\nContact Support:\n Email: background-agent-feedback@cursor.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:00:58.000Z",
+    "updatedAt": "2026-07-28T01:00:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ad60b868-8b9f-47b7-beea-c0982d954f68"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "models",
+          "item": [
+            {
+              "name": "List models",
+              "id": "4c6bf678-c818-4427-b1b8-cd5389f81f85",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/models",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "models"
+                  ]
+                },
+                "description": "Returns a recommended set of explicit model IDs you can pass\nto the `model.id` field on POST /v1/agents. To use the\nconfigured default model, omit the `model` field from the\nrequest body entirely.\n"
+              },
+              "response": [
+                {
+                  "id": "662ad0d4-90ec-411f-b025-9da9a7987394",
+                  "name": "Models retrieved successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/models",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "models"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"id\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"description\": \"<string>\",\n      \"aliases\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"parameters\": [\n        {\n          \"id\": \"<string>\",\n          \"values\": [\n            {\n              \"value\": \"<string>\",\n              \"displayName\": \"<string>\"\n            }\n          ],\n          \"displayName\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"values\": [\n            {\n              \"value\": \"<string>\",\n              \"displayName\": \"<string>\"\n            }\n          ],\n          \"displayName\": \"<string>\"\n        }\n      ],\n      \"variants\": [\n        {\n          \"params\": [\n            {\n              \"id\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"displayName\": \"<string>\",\n          \"description\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        },\n        {\n          \"params\": [\n            {\n              \"id\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"displayName\": \"<string>\",\n          \"description\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"description\": \"<string>\",\n      \"aliases\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"parameters\": [\n        {\n          \"id\": \"<string>\",\n          \"values\": [\n            {\n              \"value\": \"<string>\",\n              \"displayName\": \"<string>\"\n            }\n          ],\n          \"displayName\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"values\": [\n            {\n              \"value\": \"<string>\",\n              \"displayName\": \"<string>\"\n            }\n          ],\n          \"displayName\": \"<string>\"\n        }\n      ],\n      \"variants\": [\n        {\n          \"params\": [\n            {\n              \"id\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"displayName\": \"<string>\",\n          \"description\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        },\n        {\n          \"params\": [\n            {\n              \"id\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"displayName\": \"<string>\",\n          \"description\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:00:58.000Z",
+                  "updatedAt": "2026-07-28T01:00:58.000Z",
+                  "uid": "35240-662ad0d4-90ec-411f-b025-9da9a7987394"
+                },
+                {
+                  "id": "7a8cdd9f-5f78-486e-bdaf-d2f8e3326635",
+                  "name": "Invalid or missing API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/models",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "models"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:00:58.000Z",
+                  "updatedAt": "2026-07-28T01:00:58.000Z",
+                  "uid": "35240-7a8cdd9f-5f78-486e-bdaf-d2f8e3326635"
+                },
+                {
+                  "id": "354876ab-fbe2-47bf-bde9-4f2065508759",
+                  "name": "Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/models",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "models"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:00:58.000Z",
+                  "updatedAt": "2026-07-28T01:00:58.000Z",
+                  "uid": "35240-354876ab-fbe2-47bf-bde9-4f2065508759"
+                },
+                {
+                  "id": "f6212a66-acc7-4051-ab37-34811db278d9",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/models",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "models"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"helpUrl\": \"<uri>\",\n    \"provider\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:00:58.000Z",
+                  "updatedAt": "2026-07-28T01:00:58.000Z",
+                  "uid": "35240-f6212a66-acc7-4051-ab37-34811db278d9"
+                }
+              ],
+              "createdAt": "2026-07-28T01:00:58.000Z",
+              "updatedAt": "2026-07-28T01:00:58.000Z",
+              "uid": "35240-4c6bf678-c818-4427-b1b8-cd5389f81f85"
+            }
+          ],
+          "id": "a5f2191a-a53a-49db-b8ef-9516d8fa3203",
+          "createdAt": "2026-07-28T01:00:58.000Z",
+          "updatedAt": "2026-07-28T01:00:58.000Z",
+          "uid": "35240-a5f2191a-a53a-49db-b8ef-9516d8fa3203"
+        }
+      ],
+      "id": "6d84b44d-24cc-4504-9be4-89851a3ad695",
+      "createdAt": "2026-07-28T01:00:58.000Z",
+      "updatedAt": "2026-07-28T01:00:58.000Z",
+      "uid": "35240-6d84b44d-24cc-4504-9be4-89851a3ad695"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.cursor.com"
+    }
+  ]
+}
