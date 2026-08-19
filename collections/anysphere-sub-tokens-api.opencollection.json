@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cursor Cloud Agents Sub Tokens API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sub Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A User-Scoped Worker Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cursor.com/v1/sub-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a one-hour user-scoped token for a My Machines worker to run as an\nactive team member. Requires an agent-scoped team service account\nAPI key. User-scoped tokens can't mint other user-scoped tokens.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

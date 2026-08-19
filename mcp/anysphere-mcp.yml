@@ -6,11 +6,10 @@ server:
   name: cursor-cloud-agents
   transport: http
   url: null
-notes: >-
-  Anysphere does not publish an official hosted MCP server for the Cursor Cloud Agents
-  REST API (Cursor is an MCP *client* — it consumes MCP servers, and agents can be
-  configured with McpServer entries). This is a DERIVED candidate tool list mapping each
-  Cloud Agents operation to a prospective MCP tool, for use if/when an MCP wrapper is built.
+notes: Anysphere does not publish an official hosted MCP server for the Cursor Cloud Agents REST API (Cursor
+  is an MCP *client* — it consumes MCP servers, and agents can be configured with McpServer entries).
+  This is a DERIVED candidate tool list mapping each Cloud Agents operation to a prospective MCP tool,
+  for use if/when an MCP wrapper is built.
 tools:
 - name: create_agent
   description: Create a Cloud Agent and enqueue its initial run.
@@ -66,3 +65,9 @@ tools:
 - name: create_sub_token
   description: Create a user-scoped worker sub-token.
   source_operation: openapi/anysphere-cloud-agents-openapi-original.yml#createSubToken
+deployment:
+  mode: none
+  verified: derived
+  tools: 18
+  checked: '2026-08-12'
+  source: catalog MCP census

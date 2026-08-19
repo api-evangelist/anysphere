@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cursor Cloud Agents Me API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Me",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "API key info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/me"
+          },
+          "docs": "Retrieve information about the API key being used for authentication."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

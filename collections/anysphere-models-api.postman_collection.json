@@ -1,0 +1,257 @@
+{
+  "item": [
+    {
+      "id": "2364fcd1-8969-4df5-ac32-915e2e90c689",
+      "name": "Models",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8669397f-929b-4516-b2e1-df3e9a2de3ab",
+          "name": "List models",
+          "request": {
+            "name": "List models",
+            "description": {
+              "content": "Returns a recommended set of explicit model IDs you can pass\nto the `model.id` field on POST /v1/agents. To use the\nconfigured default model, omit the `model` field from the\nrequest body entirely.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d7c1918-ebdd-4ff0-bc8f-57a83affd6ac",
+              "name": "Models retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"composer-2\",\n      \"displayName\": \"Composer 2\",\n      \"description\": \"string\",\n      \"aliases\": [\n        \"composer-latest\",\n        \"composer\"\n      ],\n      \"parameters\": [\n        {\n          \"id\": \"fast\",\n          \"values\": [\n            {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"displayName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"displayName\": \"Fast\"\n        },\n        {\n          \"id\": \"fast\",\n          \"values\": [\n            {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"displayName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"displayName\": \"Fast\"\n        }\n      ],\n      \"variants\": [\n        {\n          \"params\": [\n            {\n              \"id\": \"string\",\n              \"value\": \"string\"\n            },\n            {\n              \"id\": \"string\",\n              \"value\": \"string\"\n            }\n          ],\n          \"displayName\": \"string\",\n          \"description\": \"string\",\n          \"isDefault\": true\n        },\n        {\n          \"params\": [\n            {\n              \"id\": \"string\",\n              \"value\": \"string\"\n            },\n            {\n              \"id\": \"string\",\n              \"value\": \"string\"\n            }\n          ],\n          \"displayName\": \"string\",\n          \"description\": \"string\",\n          \"isDefault\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"composer-2\",\n      \"displayName\": \"Composer 2\",\n      \"description\": \"string\",\n      \"aliases\": [\n        \"composer-latest\",\n        \"composer\"\n      ],\n      \"parameters\": [\n        {\n          \"id\": \"fast\",\n          \"values\": [\n            {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"displayName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"displayName\": \"Fast\"\n        },\n        {\n          \"id\": \"fast\",\n          \"values\": [\n            {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"displayName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"displayName\": \"Fast\"\n        }\n      ],\n      \"variants\": [\n        {\n          \"params\": [\n            {\n              \"id\": \"string\",\n              \"value\": \"string\"\n            },\n            {\n              \"id\": \"string\",\n              \"value\": \"string\"\n            }\n          ],\n          \"displayName\": \"string\",\n          \"description\": \"string\",\n          \"isDefault\": false\n        },\n        {\n          \"params\": [\n            {\n              \"id\": \"string\",\n              \"value\": \"string\"\n            },\n            {\n              \"id\": \"str\",\n              \"value\": \"string\"\n            }\n          ],\n          \"displayName\": \"string\",\n          \"description\": \"string\",\n          \"isDefault\": true\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef1da27e-7e14-474c-b3c0-ab0b7c3030b1",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"helpUrl\": \"https://sqNzHxi.bqyMdS6L6WcNqYiEbkbUBhFTQtbILEMlM1yPX-UZQW6RjnHB4DhkXCTWQF9L\",\n    \"provider\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22dd0299-bc4d-4142-ae1d-a1e2e234ff61",
+              "name": "Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"helpUrl\": \"https://sqNzHxi.bqyMdS6L6WcNqYiEbkbUBhFTQtbILEMlM1yPX-UZQW6RjnHB4DhkXCTWQF9L\",\n    \"provider\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a480be8-be9b-4b44-b2cc-83ba21b2864c",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"helpUrl\": \"https://sqNzHxi.bqyMdS6L6WcNqYiEbkbUBhFTQtbILEMlM1yPX-UZQW6RjnHB4DhkXCTWQF9L\",\n    \"provider\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cursor.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "18606c16-4010-439f-8e1c-fb92a809b11e",
+    "name": "Cursor Cloud Agents Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Programmatically create and manage Cursor Cloud Agents that work\nautonomously on your repositories. v1 separates a durable agent\nfrom one or more runs: each prompt submission creates a run on the\nagent. Streaming and cancellation are scoped to the active run.\n\n\nContact Support:\n Email: background-agent-feedback@cursor.com",
+      "type": "text/plain"
+    }
+  }
+}

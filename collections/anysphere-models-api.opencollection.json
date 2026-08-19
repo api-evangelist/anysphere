@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cursor Cloud Agents Models API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/models"
+          },
+          "docs": "Returns a recommended set of explicit model IDs you can pass\nto the `model.id` field on POST /v1/agents. To use the\nconfigured default model, omit the `model` field from the\nrequest body entirely.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

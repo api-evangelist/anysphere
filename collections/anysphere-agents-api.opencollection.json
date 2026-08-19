@@ -1,0 +1,356 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cursor Cloud Agents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/agents",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of agents to return."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor from the previous response."
+              },
+              {
+                "name": "prUrl",
+                "value": "",
+                "type": "query",
+                "description": "Filter agents by GitHub pull request URL."
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include archived agents."
+              }
+            ]
+          },
+          "docs": "List agents for the authenticated user, newest first."
+        },
+        {
+          "info": {
+            "name": "Create an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cursor.com/v1/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Cloud Agent and immediately enqueue its initial run.\nThe response contains both the durable `agent` and the initial\n`run`.\n"
+        },
+        {
+          "info": {
+            "name": "Get an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              }
+            ]
+          },
+          "docs": "Retrieve durable metadata for an agent. Execution status lives on runs."
+        },
+        {
+          "info": {
+            "name": "Delete an agent permanently",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cursor.com/v1/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              }
+            ]
+          },
+          "docs": "Permanently delete an agent. This action is irreversible. Use POST /v1/agents/{id}/archive for reversible removal."
+        },
+        {
+          "info": {
+            "name": "List runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/agents/:id/runs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor from the previous response."
+              }
+            ]
+          },
+          "docs": "List runs for an agent, newest first."
+        },
+        {
+          "info": {
+            "name": "Create a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cursor.com/v1/agents/:id/runs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a follow-up prompt to an existing active agent. The new\nrun uses the agent's current conversation and workspace state.\nOnly one run can be active per agent at a time.\n"
+        },
+        {
+          "info": {
+            "name": "Get a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/agents/:id/runs/:runId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the run."
+              }
+            ]
+          },
+          "docs": "Retrieve status and timestamps for a specific run."
+        },
+        {
+          "info": {
+            "name": "Stream a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/agents/:id/runs/:runId/stream",
+            "headers": [
+              {
+                "name": "Last-Event-ID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the run."
+              }
+            ]
+          },
+          "docs": "Stream Server-Sent Events for one run. Event types are\n`status`, `assistant`, `thinking`, `tool_call`,\n`interaction_update`, `heartbeat`, `result`, `error`, and\n`done`.\n\n- `status` carries `{ runId, status }`. It has no `id` line\n  and is replayed at the top of every reconnect.\n- `result` carries `{ runId, status, text?, durationMs?,\n  git? }`; `text` is the final assistant reply, `durationMs`\n  the wall-clock duration, and `git` mirrors `Run.git`.\n- `interaction_update` carries the richer SDK-s"
+        },
+        {
+          "info": {
+            "name": "Cancel a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cursor.com/v1/agents/:id/runs/:runId/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the run."
+              }
+            ]
+          },
+          "docs": "Cancel the active run for an agent. Cancellation is terminal —\nthe run transitions to `CANCELLED`. Cancelling a run that is\nalready terminal or was never active returns\n`409 run_not_cancellable`. To continue the conversation,\ncreate a new run on the same agent.\n"
+        },
+        {
+          "info": {
+            "name": "Get agent usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/agents/:id/usage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "query",
+                "description": "Scope usage to a single run. Omit to return usage for every run on the agent."
+              }
+            ]
+          },
+          "docs": "Retrieve token usage for an agent, broken down per run.\n`totalUsage` sums input, output, and cache token counts across\nevery run on the agent, and `runs` lists the same breakdown for\neach run. Token usage mirrors the `tokenUsage` shape on the team\nusage events endpoint.\n\nThis endpoint is in early access. When it isn't enabled for the\naccount it returns `403 feature_unavailable`. An unknown `runId`\nreturns `404 run_not_found`.\n"
+        },
+        {
+          "info": {
+            "name": "Archive an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cursor.com/v1/agents/:id/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              }
+            ]
+          },
+          "docs": "Archive an agent. Archived agents remain readable but cannot accept new runs until unarchived."
+        },
+        {
+          "info": {
+            "name": "Unarchive an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cursor.com/v1/agents/:id/unarchive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              }
+            ]
+          },
+          "docs": "Unarchive an agent so it can accept new runs again."
+        },
+        {
+          "info": {
+            "name": "List artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/agents/:id/artifacts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              }
+            ]
+          },
+          "docs": "List artifacts produced by an agent. Each artifact's `path` is\nrelative to the workspace's `artifacts/` directory. Pass that\n`path` to GET /v1/agents/{id}/artifacts/download to obtain a\npresigned download URL.\n"
+        },
+        {
+          "info": {
+            "name": "Download an artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cursor.com/v1/agents/:id/artifacts/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the agent."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Relative artifact path under `artifacts/`."
+              }
+            ]
+          },
+          "docs": "Retrieve a temporary 15-minute presigned S3 URL for an\nartifact. The `path` query parameter must be a relative path\nunder `artifacts/` returned by GET /v1/agents/{id}/artifacts.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
