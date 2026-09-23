@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Cursor Cloud Agents Models API
   description: 'Programmatically create and manage Cursor Cloud Agents that work
@@ -7,9 +7,7 @@ info:
 
     from one or more runs: each prompt submission creates a run on the
 
-    agent. Streaming and cancellation are scoped to the active run.
-
-    '
+    agent. Streaming and cancellation are scoped to the active run.'
   version: 1.0.0
   contact:
     email: background-agent-feedback@cursor.com
@@ -31,9 +29,7 @@ paths:
 
         configured default model, omit the `model` field from the
 
-        request body entirely.
-
-        '
+        request body entirely.'
       operationId: listModels
       responses:
         '200':
@@ -74,62 +70,6 @@ components:
           description: Permitted values for this parameter.
           items:
             $ref: '#/components/schemas/ModelParameterValueDefinition'
-    ModelVariant:
-      type: object
-      required:
-      - params
-      - displayName
-      properties:
-        params:
-          type: array
-          description: Concrete parameter values that, combined with the parent model `id`, form a valid model selection. May be empty.
-          items:
-            type: object
-            required:
-            - id
-            - value
-            properties:
-              id:
-                type: string
-                minLength: 1
-              value:
-                type: string
-                minLength: 1
-        displayName:
-          type: string
-          minLength: 1
-          description: Human-readable label for this variant.
-        description:
-          type: string
-          minLength: 1
-        isDefault:
-          type: boolean
-          description: True for the variant Cursor selects when the user picks this model without explicit `params`.
-    ModelParameterValueDefinition:
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-          minLength: 1
-          description: Permitted value for the parameter.
-          example: 'true'
-        displayName:
-          type: string
-          minLength: 1
-          description: Human-readable label for the value.
-          example: Fast
-    ListModelsResponse:
-      type: object
-      required:
-      - items
-      properties:
-        items:
-          type: array
-          description: Recommended models. Use `id` (and optionally `params`) when creating an agent.
-          items:
-            $ref: '#/components/schemas/ModelListItem'
     ModelListItem:
       type: object
       required:
@@ -223,6 +163,62 @@ components:
               type: string
               minLength: 1
               description: Optional provider identifier. Populated for codes like `integration_not_connected`.
+    ModelParameterValueDefinition:
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+          minLength: 1
+          description: Permitted value for the parameter.
+          example: 'true'
+        displayName:
+          type: string
+          minLength: 1
+          description: Human-readable label for the value.
+          example: Fast
+    ModelVariant:
+      type: object
+      required:
+      - params
+      - displayName
+      properties:
+        params:
+          type: array
+          description: Concrete parameter values that, combined with the parent model `id`, form a valid model selection. May be empty.
+          items:
+            type: object
+            required:
+            - id
+            - value
+            properties:
+              id:
+                type: string
+                minLength: 1
+              value:
+                type: string
+                minLength: 1
+        displayName:
+          type: string
+          minLength: 1
+          description: Human-readable label for this variant.
+        description:
+          type: string
+          minLength: 1
+        isDefault:
+          type: boolean
+          description: True for the variant Cursor selects when the user picks this model without explicit `params`.
+    ListModelsResponse:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          description: Recommended models. Use `id` (and optionally `params`) when creating an agent.
+          items:
+            $ref: '#/components/schemas/ModelListItem'
   responses:
     Unauthorized:
       description: Invalid or missing API key.
@@ -230,14 +226,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+    InternalError:
+      description: Internal server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    InternalError:
-      description: Internal server error.
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
       content:
         application/json:
           schema:

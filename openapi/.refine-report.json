@@ -1,11 +1,7 @@
 {
   "provider": "anysphere",
   "sources": [
-    "anysphere-agents-api-openapi.yml",
-    "anysphere-me-api-openapi.yml",
-    "anysphere-models-api-openapi.yml",
-    "anysphere-repositories-api-openapi.yml",
-    "anysphere-sub-tokens-api-openapi.yml"
+    "_original/anysphere-cloud-agents-openapi-original.yml"
   ],
   "outputs": [
     "anysphere-agents-api-openapi.yml",
@@ -17,6 +13,39 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "anysphere-cloud-agents-openapi-original.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths POST /v1/agents -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/agents -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/agents/{id} -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths DELETE /v1/agents/{id} -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths POST /v1/agents/{id}/runs -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/agents/{id}/runs -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/agents/{id}/runs/{runId} -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/agents/{id}/runs/{runId}/stream -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths POST /v1/agents/{id}/runs/{runId}/cancel -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/agents/{id}/usage -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths POST /v1/agents/{id}/archive -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths POST /v1/agents/{id}/unarchive -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/agents/{id}/artifacts -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/agents/{id}/artifacts/download -> Agents",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/me -> Me",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/models -> Models",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths GET /v1/repositories -> Repositories",
+    "anysphere-cloud-agents-openapi-original.yml: tagged paths POST /v1/sub-tokens -> Sub Tokens",
+    "anysphere-cloud-agents-openapi-original.yml: declared missing tag: Agents",
+    "anysphere-cloud-agents-openapi-original.yml: declared missing tag: Me",
+    "anysphere-cloud-agents-openapi-original.yml: declared missing tag: Models",
+    "anysphere-cloud-agents-openapi-original.yml: declared missing tag: Repositories",
+    "anysphere-cloud-agents-openapi-original.yml: declared missing tag: Sub Tokens",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "anysphere-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "anysphere-me-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "anysphere-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "anysphere-repositories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "anysphere-sub-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

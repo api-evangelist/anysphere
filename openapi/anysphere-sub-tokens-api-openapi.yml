@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Cursor Cloud Agents Sub Tokens API
   description: 'Programmatically create and manage Cursor Cloud Agents that work
@@ -7,9 +7,7 @@ info:
 
     from one or more runs: each prompt submission creates a run on the
 
-    agent. Streaming and cancellation are scoped to the active run.
-
-    '
+    agent. Streaming and cancellation are scoped to the active run.'
   version: 1.0.0
   contact:
     email: background-agent-feedback@cursor.com
@@ -29,9 +27,7 @@ paths:
 
         active team member. Requires an agent-scoped team service account
 
-        API key. User-scoped tokens can''t mint other user-scoped tokens.
-
-        '
+        API key. User-scoped tokens can''t mint other user-scoped tokens.'
       operationId: createSubToken
       requestBody:
         required: true
@@ -88,14 +84,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+    InternalError:
+      description: Internal server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Validation error or malformed request body.
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
       content:
         application/json:
           schema:
@@ -106,8 +102,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    InternalError:
-      description: Internal server error.
+    BadRequest:
+      description: Validation error or malformed request body.
       content:
         application/json:
           schema:
