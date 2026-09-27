@@ -71,96 +71,7 @@ paths:
       tags:
       - Sub Tokens
 components:
-  responses:
-    Forbidden:
-      description: Authenticated but insufficient permissions, plan required, or feature unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Agent or run not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Validation error or malformed request body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    CreateSubTokenRequest:
-      type: object
-      description: Provide exactly one active team member identifier.
-      properties:
-        forUserEmail:
-          type: string
-          format: email
-          minLength: 1
-          description: Active team member email. Case-insensitive. Mutually exclusive with `forUserId`.
-          example: alice@company.com
-        forUserId:
-          type: integer
-          minimum: 1
-          description: Active team member's numeric Cursor user ID. Mutually exclusive with `forUserEmail`.
-          example: 42
-      oneOf:
-      - required:
-        - forUserEmail
-        not:
-          required:
-          - forUserId
-      - required:
-        - forUserId
-        not:
-          required:
-          - forUserEmail
-    CreateSubTokenResponse:
-      type: object
-      required:
-      - accessToken
-      - expiresAt
-      - userId
-      - teamId
-      properties:
-        accessToken:
-          type: string
-          minLength: 1
-          description: Short-lived access token scoped to the requested user. Pass this to the worker with --auth-token or write it to the file used by --auth-token-file.
-          example: eyJ...
-        expiresAt:
-          type: string
-          format: date-time
-          description: When the access token expires (1 hour after mint).
-          example: '2026-04-24T19:00:00.000Z'
-        userId:
-          type: integer
-          description: Numeric ID of the resolved team member.
-          example: 42
-        teamId:
-          type: integer
-          description: Numeric ID of the service account's team.
-          example: 456
     Error:
       type: object
       required:
@@ -216,6 +127,95 @@ components:
               type: string
               minLength: 1
               description: Optional provider identifier. Populated for codes like `integration_not_connected`.
+    CreateSubTokenResponse:
+      type: object
+      required:
+      - accessToken
+      - expiresAt
+      - userId
+      - teamId
+      properties:
+        accessToken:
+          type: string
+          minLength: 1
+          description: Short-lived access token scoped to the requested user. Pass this to the worker with --auth-token or write it to the file used by --auth-token-file.
+          example: eyJ...
+        expiresAt:
+          type: string
+          format: date-time
+          description: When the access token expires (1 hour after mint).
+          example: '2026-04-24T19:00:00.000Z'
+        userId:
+          type: integer
+          description: Numeric ID of the resolved team member.
+          example: 42
+        teamId:
+          type: integer
+          description: Numeric ID of the service account's team.
+          example: 456
+    CreateSubTokenRequest:
+      type: object
+      description: Provide exactly one active team member identifier.
+      properties:
+        forUserEmail:
+          type: string
+          format: email
+          minLength: 1
+          description: Active team member email. Case-insensitive. Mutually exclusive with `forUserId`.
+          example: alice@company.com
+        forUserId:
+          type: integer
+          minimum: 1
+          description: Active team member's numeric Cursor user ID. Mutually exclusive with `forUserEmail`.
+          example: 42
+      oneOf:
+      - required:
+        - forUserEmail
+        not:
+          required:
+          - forUserId
+      - required:
+        - forUserId
+        not:
+          required:
+          - forUserEmail
+  responses:
+    Forbidden:
+      description: Authenticated but insufficient permissions, plan required, or feature unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation error or malformed request body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Agent or run not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

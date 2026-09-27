@@ -48,66 +48,6 @@ paths:
       - Models
 components:
   schemas:
-    ModelParameterDefinition:
-      type: object
-      required:
-      - id
-      - values
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: Parameter identifier. Pass as `model.params[].id`.
-          example: fast
-        displayName:
-          type: string
-          minLength: 1
-          description: Human-readable label for the parameter.
-          example: Fast
-        values:
-          type: array
-          minItems: 1
-          description: Permitted values for this parameter.
-          items:
-            $ref: '#/components/schemas/ModelParameterValueDefinition'
-    ModelListItem:
-      type: object
-      required:
-      - id
-      - displayName
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: Pass this value as `model.id` when creating an agent.
-          example: composer-2
-        displayName:
-          type: string
-          minLength: 1
-          description: Human-readable model name.
-          example: Composer 2
-        description:
-          type: string
-          minLength: 1
-        aliases:
-          type: array
-          description: Alternate IDs that resolve to the same model.
-          items:
-            type: string
-            minLength: 1
-          example:
-          - composer-latest
-          - composer
-        parameters:
-          type: array
-          description: Per-model parameter definitions, when the model accepts parameters. Use these to populate `model.params`.
-          items:
-            $ref: '#/components/schemas/ModelParameterDefinition'
-        variants:
-          type: array
-          description: Concrete `id`+`params` combinations the model accepts.
-          items:
-            $ref: '#/components/schemas/ModelVariant'
     Error:
       type: object
       required:
@@ -163,21 +103,28 @@ components:
               type: string
               minLength: 1
               description: Optional provider identifier. Populated for codes like `integration_not_connected`.
-    ModelParameterValueDefinition:
+    ModelParameterDefinition:
       type: object
       required:
-      - value
+      - id
+      - values
       properties:
-        value:
+        id:
           type: string
           minLength: 1
-          description: Permitted value for the parameter.
-          example: 'true'
+          description: Parameter identifier. Pass as `model.params[].id`.
+          example: fast
         displayName:
           type: string
           minLength: 1
-          description: Human-readable label for the value.
+          description: Human-readable label for the parameter.
           example: Fast
+        values:
+          type: array
+          minItems: 1
+          description: Permitted values for this parameter.
+          items:
+            $ref: '#/components/schemas/ModelParameterValueDefinition'
     ModelVariant:
       type: object
       required:
@@ -209,6 +156,44 @@ components:
         isDefault:
           type: boolean
           description: True for the variant Cursor selects when the user picks this model without explicit `params`.
+    ModelListItem:
+      type: object
+      required:
+      - id
+      - displayName
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Pass this value as `model.id` when creating an agent.
+          example: composer-2
+        displayName:
+          type: string
+          minLength: 1
+          description: Human-readable model name.
+          example: Composer 2
+        description:
+          type: string
+          minLength: 1
+        aliases:
+          type: array
+          description: Alternate IDs that resolve to the same model.
+          items:
+            type: string
+            minLength: 1
+          example:
+          - composer-latest
+          - composer
+        parameters:
+          type: array
+          description: Per-model parameter definitions, when the model accepts parameters. Use these to populate `model.params`.
+          items:
+            $ref: '#/components/schemas/ModelParameterDefinition'
+        variants:
+          type: array
+          description: Concrete `id`+`params` combinations the model accepts.
+          items:
+            $ref: '#/components/schemas/ModelVariant'
     ListModelsResponse:
       type: object
       required:
@@ -219,6 +204,21 @@ components:
           description: Recommended models. Use `id` (and optionally `params`) when creating an agent.
           items:
             $ref: '#/components/schemas/ModelListItem'
+    ModelParameterValueDefinition:
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+          minLength: 1
+          description: Permitted value for the parameter.
+          example: 'true'
+        displayName:
+          type: string
+          minLength: 1
+          description: Human-readable label for the value.
+          example: Fast
   responses:
     Unauthorized:
       description: Invalid or missing API key.
@@ -226,14 +226,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    InternalError:
-      description: Internal server error.
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+    InternalError:
+      description: Internal server error.
       content:
         application/json:
           schema:
