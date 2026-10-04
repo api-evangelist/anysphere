@@ -41,7 +41,60 @@ paths:
       tags:
       - Me
 components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    ApiKeyInfo:
+      type: object
+      required:
+      - apiKeyName
+      - createdAt
+      properties:
+        apiKeyName:
+          type: string
+          description: Display name of the API key.
+          example: Production API Key
+        createdAt:
+          type: string
+          format: date-time
+          description: When the API key was created.
+        userId:
+          type: integer
+          minimum: 0
+          description: Numeric Cursor user ID of the API key's owner. Omitted for service-account / team API keys, which aren't tied to a specific user.
+          example: 42
+        userEmail:
+          type: string
+          format: email
+          description: Email of the API key's owner. Omitted for service-account / team API keys.
+          example: developer@example.com
+        userFirstName:
+          type: string
+          minLength: 1
+          description: First name of the API key's owner, when populated.
+          example: Alex
+        userLastName:
+          type: string
+          minLength: 1
+          description: Last name of the API key's owner, when populated.
+          example: Rivera
     Error:
       type: object
       required:
@@ -97,59 +150,6 @@ components:
               type: string
               minLength: 1
               description: Optional provider identifier. Populated for codes like `integration_not_connected`.
-    ApiKeyInfo:
-      type: object
-      required:
-      - apiKeyName
-      - createdAt
-      properties:
-        apiKeyName:
-          type: string
-          description: Display name of the API key.
-          example: Production API Key
-        createdAt:
-          type: string
-          format: date-time
-          description: When the API key was created.
-        userId:
-          type: integer
-          minimum: 0
-          description: Numeric Cursor user ID of the API key's owner. Omitted for service-account / team API keys, which aren't tied to a specific user.
-          example: 42
-        userEmail:
-          type: string
-          format: email
-          description: Email of the API key's owner. Omitted for service-account / team API keys.
-          example: developer@example.com
-        userFirstName:
-          type: string
-          minLength: 1
-          description: First name of the API key's owner, when populated.
-          example: Alex
-        userLastName:
-          type: string
-          minLength: 1
-          description: Last name of the API key's owner, when populated.
-          example: Rivera
-  responses:
-    RateLimited:
-      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
