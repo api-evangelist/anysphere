@@ -132,6 +132,8 @@ apis:
   - type: Documentation
     url: https://cursor.com/docs
 common:
+- type: Plans
+  url: plans/anysphere-plans-pricing.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/anysphere/overview
 - type: VulnerabilityDisclosure
