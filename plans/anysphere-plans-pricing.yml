@@ -1,0 +1,46 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://cursor.com/pricing
+sources:
+- https://cursor.com/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+  managed_tier: Pro
+published: true
+note: Monthly/Yearly toggle; FAQ notes each plan includes a set amount of model usage with on-demand usage
+  billed in arrears.
+plan_count: 4
+currency: USD
+plans:
+- name: Hobby
+  price_text: Free
+  period: none
+  included_quota: No credit card required; Limited Agent requests; Access to Composer
+- name: Individual
+  price_text: $20 / mo.
+  price: 20
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Pro, Pro+, Ultra tiers; extended limits on Agent
+  overage: Bugbot on usage-based billing
+- name: Teams
+  price_text: $40 / user / mo.
+  price: 40
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Standard, Premium
+- name: Enterprise
+  price_text: Custom
+  period: none
+  included_quota: Pooled usage, SCIM, audit logs
