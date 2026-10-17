@@ -72,18 +72,6 @@ paths:
       - Sub Tokens
 components:
   responses:
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     InternalError:
       description: Internal server error.
       content:
@@ -92,6 +80,18 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: Agent or run not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded. Response includes `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
       content:
         application/json:
           schema:
@@ -135,6 +135,32 @@ components:
           type: integer
           description: Numeric ID of the service account's team.
           example: 456
+    CreateSubTokenRequest:
+      type: object
+      description: Provide exactly one active team member identifier.
+      properties:
+        forUserEmail:
+          type: string
+          format: email
+          minLength: 1
+          description: Active team member email. Case-insensitive. Mutually exclusive with `forUserId`.
+          example: alice@company.com
+        forUserId:
+          type: integer
+          minimum: 1
+          description: Active team member's numeric Cursor user ID. Mutually exclusive with `forUserEmail`.
+          example: 42
+      oneOf:
+      - required:
+        - forUserEmail
+        not:
+          required:
+          - forUserId
+      - required:
+        - forUserId
+        not:
+          required:
+          - forUserEmail
     Error:
       type: object
       required:
@@ -190,32 +216,6 @@ components:
               type: string
               minLength: 1
               description: Optional provider identifier. Populated for codes like `integration_not_connected`.
-    CreateSubTokenRequest:
-      type: object
-      description: Provide exactly one active team member identifier.
-      properties:
-        forUserEmail:
-          type: string
-          format: email
-          minLength: 1
-          description: Active team member email. Case-insensitive. Mutually exclusive with `forUserId`.
-          example: alice@company.com
-        forUserId:
-          type: integer
-          minimum: 1
-          description: Active team member's numeric Cursor user ID. Mutually exclusive with `forUserEmail`.
-          example: 42
-      oneOf:
-      - required:
-        - forUserEmail
-        not:
-          required:
-          - forUserId
-      - required:
-        - forUserId
-        not:
-          required:
-          - forUserEmail
   securitySchemes:
     basicAuth:
       type: http
