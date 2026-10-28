@@ -64,6 +64,150 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Anysphere is a company surfaced as a portfolio company of thrive-capital and added to the API Evangelist network as a stub for enrichment. Sector: developer-tools. This profile is a lead awaiting the enrichment pipeline.
+Anysphere is the applied-research company behind Cursor, the AI-native code editor and agent platform. Beyond the desktop app, Cursor ships a public Cloud Agents REST API (https://api.cursor.com) that lets developers programmatically create autonomous coding agents, submit prompt runs, stream run events over SSE, and retrieve produced artifacts, plus an Admin API for team member/usage/spend management and a first-party terminal CLI (the `agent` binary). Authentication is a dashboard-issued API key over HTTP Basic/Bearer. This profile was surfaced as a Thrive Capital portfolio company and enriched from Cursor's public developer surface.
 
-Backed by: thrive-capital — https://anysphere.inc
+**Areas:** Company · Developer Tools · Artificial Intelligence · Code Editor · Coding Agents · Cloud Agents · Developer Productivity · IDE
+
+## Anysphere on APIs.io
+
+Everything profiled for Anysphere is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/anysphere/](https://apis.io/providers/anysphere/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [Anysphere Agents API](https://apis.io/apis/anysphere/anysphere-agents-api/) — The Agents API from Anysphere — 11 operation(s) for agents.
+- [Anysphere Me API](https://apis.io/apis/anysphere/anysphere-me-api/) — The Me API from Anysphere — 1 operation(s) for me.
+- [Anysphere Models API](https://apis.io/apis/anysphere/anysphere-models-api/) — The Models API from Anysphere — 1 operation(s) for models.
+- [Anysphere Repositories API](https://apis.io/apis/anysphere/anysphere-repositories-api/) — The Repositories API from Anysphere — 1 operation(s) for repositories.
+- [Anysphere Sub Tokens API](https://apis.io/apis/anysphere/anysphere-sub-tokens-api/) — The Sub Tokens API from Anysphere — 1 operation(s) for sub tokens.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [cursor-cloud-agents](https://apis.io/servers/anysphere/cursor-cloud-agents/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Anysphere Agentic Access](https://apis.io/agentic-access/anysphere/anysphere-agentic-access/)
+
+#### Collections (10)
+
+Postman and Open Collection request collections.
+
+- [Cursor Cloud Agents API](https://apis.io/collections/anysphere/open-anysphere-agents-api/)
+- [Cursor Cloud Agents Me API](https://apis.io/collections/anysphere/open-anysphere-me-api/)
+- [Cursor Cloud Agents Models API](https://apis.io/collections/anysphere/open-anysphere-models-api/)
+- [Cursor Cloud Agents Repositories API](https://apis.io/collections/anysphere/open-anysphere-repositories-api/)
+- [Cursor Cloud Agents Sub Tokens API](https://apis.io/collections/anysphere/open-anysphere-sub-tokens-api/)
+- [Cursor Cloud Agents API](https://apis.io/collections/anysphere/postman-anysphere-agents-api/)
+- [Cursor Cloud Agents Me API](https://apis.io/collections/anysphere/postman-anysphere-me-api/)
+- [Cursor Cloud Agents Models API](https://apis.io/collections/anysphere/postman-anysphere-models-api/)
+- [Cursor Cloud Agents Repositories API](https://apis.io/collections/anysphere/postman-anysphere-repositories-api/)
+- [Cursor Cloud Agents Sub Tokens API](https://apis.io/collections/anysphere/postman-anysphere-sub-tokens-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Anysphere Cloud Agents Overlay](https://apis.io/overlays/anysphere/anysphere-cloud-agents-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Anysphere Authentication](https://apis.io/security/anysphere/anysphere-authentication/)
+- [Anysphere Domain Security](https://apis.io/security/anysphere/anysphere-domain-security/)
+- [Anysphere Trust Center](https://apis.io/security/anysphere/anysphere-trust-center/)
+- [Anysphere Vulnerability Disclosure](https://apis.io/security/anysphere/anysphere-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Anysphere Plans Pricing](https://apis.io/plans/anysphere/anysphere-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Anysphere Rate Limits](https://apis.io/rate-limits/anysphere/anysphere-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://anysphere.inc)
+- [Documentation](https://cursor.com/docs)
+- [Getting started](https://cursor.com/docs/get-started/quickstart)
+- [API reference](https://cursor.com/docs)
+- [Pricing](https://cursor.com/pricing)
+- [Sign up](https://cursor.com/dashboard/api)
+- [Support](https://forum.cursor.com)
+- [Blog](https://cursor.com/blog)
+- [Security](https://cursor.com/security)
+- [Compliance](https://cursor.com/security)
+- [Terms of service](https://cursor.com/terms-of-service)
+- [Privacy policy](https://cursor.com/privacy)
+- [GitHub](https://github.com/cursor)
+- [Status](https://status.cursor.com)
+
+## API Evangelist rating
+
+**Kin Score 42.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 51.5 |
+| Contract governance | 4.5 |
+| Operational transparency | 65.8 |
+| Developer ergonomics | 26.8 |
+| Access clarity | 39.5 |
+
+**Agent readiness 26.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 20.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/anysphere/](https://apis.io/providers/anysphere/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Anysphere: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/anysphere/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
